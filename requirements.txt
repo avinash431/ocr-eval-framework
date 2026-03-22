@@ -1,0 +1,35 @@
+# Core
+pyyaml>=6.0
+pillow>=10.0
+tqdm>=4.65
+requests>=2.31
+pandas>=2.0
+jinja2>=3.1
+openpyxl>=3.1
+matplotlib>=3.7
+
+# Metrics
+python-Levenshtein>=0.21
+nltk>=3.8
+rapidfuzz>=3.0
+
+# Cloud APIs
+azure-ai-documentintelligence>=1.0.0
+google-cloud-vision>=3.5
+boto3>=1.28
+mistralai>=1.0
+
+# Open-source OCR
+pytesseract>=0.3.10
+paddleocr>=2.7
+paddlepaddle>=2.5
+docling>=2.0
+surya-ocr>=0.6
+
+# VLM models (uncomment based on your hardware)
+torch>=2.1
+torchvision>=0.16
+transformers>=4.40
+accelerate>=0.27
+# vllm>=0.4             # Linux + CUDA only, for DeepSeek/olmOCR
+# flash-attn>=2.5       # Optional speedup, CUDA only

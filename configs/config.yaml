@@ -1,0 +1,80 @@
+# ============================================================
+# OCR Evaluation Framework — Configuration
+# ============================================================
+# Copy this to config.local.yaml and fill in your credentials.
+# config.local.yaml is gitignored.
+
+paths:
+  dataset_dir: "./test-dataset"
+  results_dir: "./results"
+  ground_truth_dir: "./test-dataset/ground_truth"
+
+# auto | cpu | cuda | mps
+device: "auto"
+
+execution:
+  timeout_seconds: 120
+  max_retries: 2
+  save_raw_output: true
+
+# ------------------------------------
+# Cloud API Credentials
+# ------------------------------------
+# All API keys are loaded from .env file via environment variables.
+# Only non-secret settings (model IDs, regions, etc.) belong here.
+
+azure:
+  model_id: "prebuilt-layout"
+  # AZURE_ENDPOINT and AZURE_API_KEY loaded from .env
+
+google:
+  # GOOGLE_APPLICATION_CREDENTIALS loaded from .env
+
+aws:
+  region: "us-east-1"
+  # AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY loaded from .env
+
+mistral:
+  model: "mistral-ocr-latest"
+  # MISTRAL_API_KEY loaded from .env
+
+sarvam:
+  # SARVAM_API_KEY and SARVAM_ENDPOINT loaded from .env
+
+# ------------------------------------
+# Open-Source Model Settings
+# ------------------------------------
+tesseract:
+  lang: "eng+hin+tel+tam+ben"
+  psm: 3
+  oem: 3
+
+paddleocr:
+  lang: "en"
+  use_angle_cls: true
+  use_gpu: true
+
+docling:
+  model_name: "docling"
+
+surya:
+  langs: ["en", "hi", "te", "ta", "bn"]
+
+deepseek_ocr:
+  model_path: "deepseek-ai/DeepSeek-OCR"
+
+qwen_vl:
+  model_name: "Qwen/Qwen2.5-VL-7B-Instruct"
+
+olmocr:
+  model_name: "allenai/olmOCR-7B-0225-preview"
+
+got_ocr:
+  model_name: "stepfun-ai/GOT-OCR-2.0-hf"
+
+metrics:
+  - cer
+  - wer
+  - bleu
+  - edit_dist
+  - f1

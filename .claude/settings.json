@@ -1,0 +1,8 @@
+{
+  "skills": [
+    ".claude/skills/add-ocr-model/SKILL.md",
+    ".claude/skills/run-evaluation/SKILL.md",
+    ".claude/skills/analyze-results/SKILL.md",
+    ".claude/skills/manage-dataset/SKILL.md"
+  ]
+}
