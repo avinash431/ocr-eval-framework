@@ -221,6 +221,10 @@ python evaluate.py --results-dir results/latest --export-csv
 
 ## Known Issues
 
+- **Tesseract not found error**: Tesseract is a system-level install (C++ binary), not a pip package. The `pytesseract` pip package is just a Python wrapper. Install the engine separately:
+  - macOS: `brew install tesseract tesseract-lang`
+  - Linux: `sudo apt install tesseract-ocr tesseract-ocr-hin tesseract-ocr-tel tesseract-ocr-tam tesseract-ocr-ben`
+  - Windows: Download from [UB-Mannheim](https://github.com/UB-Mannheim/tesseract/wiki) and add to PATH
 - **Mistral SDK import**: Use `from mistralai.client import Mistral` (not `from mistralai import Mistral`) — the import path changed in SDK v2
 - **Tesseract multi-lang garbling**: Setting `lang: eng+hin+tel+tam+ben` can cause English text to be misread as Indic scripts. Use `lang: eng` for English-only documents in `configs/config.yaml`
 - **HuggingFace 401 errors**: Run `huggingface-cli login` and accept gated dataset terms (see Prerequisites section above)
