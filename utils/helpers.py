@@ -33,6 +33,7 @@ _ENV_TO_CONFIG = {
     "AWS_SECRET_ACCESS_KEY": ("aws", "secret_access_key"),
     "MISTRAL_API_KEY": ("mistral", "api_key"),
     "SARVAM_API_KEY": ("sarvam", "api_key"),
+    "SARVAM_OCR_KEY": ("sarvam", "api_key"),
     "SARVAM_ENDPOINT": ("sarvam", "endpoint"),
 }
 
@@ -41,8 +42,15 @@ def _overlay_env_vars(config: dict) -> dict:
     """Override YAML config values with environment variables when set."""
     for env_var, (section, key) in _ENV_TO_CONFIG.items():
         value = os.environ.get(env_var)
-        if value:
-            config.setdefault(section, {})[key] = value
+        if not value:
+            continue
+
+        section_value = config.get(section)
+        if section_value is None:
+            config[section] = {}
+            section_value = config[section]
+
+        section_value[key] = value
     return config
 
 

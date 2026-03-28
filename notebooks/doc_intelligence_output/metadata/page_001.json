@@ -1,0 +1,268 @@
+{
+  "page_num": 1,
+  "image_width": 762,
+  "image_height": 1000,
+  "created_at": "2026-03-28T09:05:52.311486+00:00",
+  "blocks": [
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_000",
+      "coordinates": {
+        "x1": 23.0,
+        "y1": 32.0,
+        "x2": 96.0,
+        "y2": 99.0
+      },
+      "layout_tag": "header",
+      "confidence": 0.8841140270233154,
+      "reading_order": 1,
+      "text": "B&W"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_001",
+      "coordinates": {
+        "x1": 142.0,
+        "y1": 45.0,
+        "x2": 544.0,
+        "y2": 67.0
+      },
+      "layout_tag": "headline",
+      "confidence": 0.885969877243042,
+      "reading_order": 2,
+      "text": "QUALITY IMPROVEMENT SUGGESTION"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_002",
+      "coordinates": {
+        "x1": 119.0,
+        "y1": 76.0,
+        "x2": 566.0,
+        "y2": 110.0
+      },
+      "layout_tag": "headline",
+      "confidence": 0.8963147401809692,
+      "reading_order": 3,
+      "text": "OUR MISSION IS SUPERIOR CONSUMER SATISFACTION\nHighest Quality, Teamwork, Do Right Things Right The First Time"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_003",
+      "coordinates": {
+        "x1": 590.0,
+        "y1": 32.0,
+        "x2": 664.0,
+        "y2": 101.0
+      },
+      "layout_tag": "header",
+      "confidence": 0.6183813810348511,
+      "reading_order": 4,
+      "text": "QUALITY"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_004",
+      "coordinates": {
+        "x1": 226.0,
+        "y1": 118.0,
+        "x2": 460.0,
+        "y2": 136.0
+      },
+      "layout_tag": "section-title",
+      "confidence": 0.845905601978302,
+      "reading_order": 5,
+      "text": "RESEARCH & DEVELOPMENT"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_005",
+      "coordinates": {
+        "x1": 9.0,
+        "y1": 164.0,
+        "x2": 422.0,
+        "y2": 180.0
+      },
+      "layout_tag": "paragraph",
+      "confidence": 0.6104318499565125,
+      "reading_order": 6,
+      "text": "DATE: June 21, 1993DEPARTMENT: R&D Library"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_006",
+      "coordinates": {
+        "x1": 8.0,
+        "y1": 192.0,
+        "x2": 431.0,
+        "y2": 208.0
+      },
+      "layout_tag": "paragraph",
+      "confidence": 0.6877104043960571,
+      "reading_order": 7,
+      "text": "SUBMITTED BY: Carol S. Lincoln _________________________"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_007",
+      "coordinates": {
+        "x1": 8.0,
+        "y1": 220.0,
+        "x2": 432.0,
+        "y2": 237.0
+      },
+      "layout_tag": "paragraph",
+      "confidence": 0.5479217171669006,
+      "reading_order": 8,
+      "text": "SUBMITTER'S SS#: 407-64-3484"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_008",
+      "coordinates": {
+        "x1": 454.0,
+        "y1": 150.0,
+        "x2": 672.0,
+        "y2": 264.0
+      },
+      "layout_tag": "paragraph",
+      "confidence": 0.579191267490387,
+      "reading_order": 9,
+      "text": "Quality Coord Only\nDate Rec'd 6/21/93\nQIP Log #1 93-0307\nType EQPR\nStatus (1993)\nKeywords (1993)"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_009",
+      "coordinates": {
+        "x1": 9.0,
+        "y1": 278.0,
+        "x2": 359.0,
+        "y2": 293.0
+      },
+      "layout_tag": "section-title",
+      "confidence": 0.7657338380813599,
+      "reading_order": 10,
+      "text": "SUGGESTION: (Describe Current Situation and Idea)"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_010",
+      "coordinates": {
+        "x1": 18.0,
+        "y1": 307.0,
+        "x2": 682.0,
+        "y2": 434.0
+      },
+      "layout_tag": "paragraph",
+      "confidence": 0.9228969216346741,
+      "reading_order": 11,
+      "text": "The current system of managing records is too complex. The trend seems to be increasingly\nspecific, when we should be getting more general. Right now, people must work to understand\nthe system. We must spend too much time administering the system, labeling, and cleaning\nour files. Complying is a real burden, both for the individual and for the records\ncoordinators."
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_011",
+      "coordinates": {
+        "x1": 9.0,
+        "y1": 476.0,
+        "x2": 303.0,
+        "y2": 492.0
+      },
+      "layout_tag": "section-title",
+      "confidence": 0.6954026818275452,
+      "reading_order": 12,
+      "text": "Describe Possible Solutions and Benefits:"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_012",
+      "coordinates": {
+        "x1": 32.0,
+        "y1": 501.0,
+        "x2": 660.0,
+        "y2": 518.0
+      },
+      "layout_tag": "paragraph",
+      "confidence": 0.27712690830230713,
+      "reading_order": 13,
+      "text": "1. Drop the category specifications altogether."
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_013",
+      "coordinates": {
+        "x1": 31.0,
+        "y1": 529.0,
+        "x2": 259.0,
+        "y2": 546.0
+      },
+      "layout_tag": "paragraph",
+      "confidence": 0.7815815210342407,
+      "reading_order": 14,
+      "text": "2. Use moregeneral categories."
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_014",
+      "coordinates": {
+        "x1": 11.0,
+        "y1": 551.0,
+        "x2": 657.0,
+        "y2": 604.0
+      },
+      "layout_tag": "paragraph",
+      "confidence": 0.8287132978439331,
+      "reading_order": 15,
+      "text": "hate: I have passed this to Scott Appleton for the task force to use,\nin streamlining the records management program.\nPROFIT IMPROVEMENT: (If Applicable)"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_015",
+      "coordinates": {
+        "x1": 11.0,
+        "y1": 647.0,
+        "x2": 100.0,
+        "y2": 661.0
+      },
+      "layout_tag": "footer",
+      "confidence": 0.5794394612312317,
+      "reading_order": 16,
+      "text": "RESPOND HERE"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_016",
+      "coordinates": {
+        "x1": 215.0,
+        "y1": 644.0,
+        "x2": 637.0,
+        "y2": 663.0
+      },
+      "layout_tag": "paragraph",
+      "confidence": 0.4711677134037018,
+      "reading_order": 17,
+      "text": "Implement: ☐ Yes ☐ No ☐ Pending Date_______"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_017",
+      "coordinates": {
+        "x1": 54.0,
+        "y1": 876.0,
+        "x2": 222.0,
+        "y2": 890.0
+      },
+      "layout_tag": "footer",
+      "confidence": 0.710249662399292,
+      "reading_order": 18,
+      "text": "Approval Signature/Date"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_018",
+      "coordinates": {
+        "x1": 261.0,
+        "y1": 875.0,
+        "x2": 526.0,
+        "y2": 903.0
+      },
+      "layout_tag": "footer",
+      "confidence": 0.4361085891723633,
+      "reading_order": 19,
+      "text": "(Sign & Print Names)                       Responder/Date\n     (See Instructions On Back)"
+    },
+    {
+      "block_id": "20260328_f2b40f9e-5bdb-4380-ad1c-d7d4e41fe509_1_block_019",
+      "coordinates": {
+        "x1": 632.0,
+        "y1": 772.0,
+        "x2": 655.0,
+        "y2": 890.0
+      },
+      "layout_tag": "sidebar",
+      "confidence": 0.7567207217216492,
+      "reading_order": 20,
+      "text": "632120763"
+    }
+  ]
+}
