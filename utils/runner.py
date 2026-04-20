@@ -49,9 +49,20 @@ class EvalRunner:
         model.teardown()
         return result
 
-    def run_model(self, model_name: str, doc_paths: list = None) -> Path:
-        """Run one model on all documents. Returns path to results."""
-        run_dir = self._make_run_dir(model_name)
+    def run_model(self, model_name: str, doc_paths: list = None,
+                  resume_dir: str | None = None) -> Path:
+        """Run one model on all documents. Returns path to results.
+
+        If resume_dir is provided, reuses that run directory and skips any
+        document whose raw_outputs file already exists — lets a killed run
+        pick up exactly where it stopped.
+        """
+        if resume_dir:
+            run_dir = Path(resume_dir)
+            (run_dir / "raw_outputs").mkdir(parents=True, exist_ok=True)
+            (run_dir / "metrics").mkdir(parents=True, exist_ok=True)
+        else:
+            run_dir = self._make_run_dir(model_name)
         docs = doc_paths or find_documents(self.dataset_dir)
 
         if not docs:
@@ -63,38 +74,61 @@ class EvalRunner:
         print(f"  Running: {model.display_name}")
         print(f"  Documents: {len(docs)}")
         print(f"  Results: {run_dir}")
+        if resume_dir:
+            print("  Mode: RESUME (skip docs with existing raw_output)")
         print(f"{'='*60}\n")
 
-        results = []
-        metrics_list = []
+        results_path = run_dir / f"{model_name}_results.json"
+        metrics_path = run_dir / "metrics" / f"{model_name}_metrics.json"
+
+        if resume_dir and results_path.exists():
+            try:
+                with open(results_path) as f:
+                    results = json.load(f)
+            except Exception:
+                results = []
+        else:
+            results = []
+
+        if resume_dir and metrics_path.exists():
+            try:
+                with open(metrics_path) as f:
+                    metrics_list = json.load(f)
+            except Exception:
+                metrics_list = []
+        else:
+            metrics_list = []
+
+        already_done = {r.get("document_path") for r in results if r.get("success")}
 
         for doc_path in tqdm(docs, desc=model.display_name):
+            cat_slug = get_document_category(str(doc_path)).replace("/", "_")
+            out_file = run_dir / "raw_outputs" / f"{model_name}__{cat_slug}__{doc_path.stem}.txt"
+            resolved = str(Path(doc_path).resolve())
+
+            if resume_dir and (resolved in already_done or out_file.exists()):
+                continue
+
             result = model.ocr(str(doc_path))
             result_dict = result.to_dict()
             result_dict["category"] = get_document_category(str(doc_path))
             results.append(result_dict)
 
-            # Save raw output
             if self.config.get("execution", {}).get("save_raw_output", True) and result.success:
-                cat_slug = get_document_category(str(doc_path)).replace("/", "_")
-                out_file = run_dir / "raw_outputs" / f"{model_name}__{cat_slug}__{doc_path.stem}.txt"
                 out_file.write_text(result.raw_text, encoding="utf-8")
 
-            # Compute metrics if ground truth available
             if self.gt_dir:
                 gt = get_ground_truth(str(doc_path), self.gt_dir)
                 if gt and result.success:
                     m = compute_all_metrics(result.raw_text, gt, str(doc_path), model_name)
                     metrics_list.append(m.to_dict())
 
-        # Save results JSON
-        with open(run_dir / f"{model_name}_results.json", "w") as f:
-            json.dump(results, f, indent=2, ensure_ascii=False)
-
-        # Save metrics
-        if metrics_list:
-            with open(run_dir / "metrics" / f"{model_name}_metrics.json", "w") as f:
-                json.dump(metrics_list, f, indent=2)
+            # Flush after every doc so a mid-batch kill doesn't discard progress.
+            with open(results_path, "w") as f:
+                json.dump(results, f, indent=2, ensure_ascii=False)
+            if metrics_list:
+                with open(metrics_path, "w") as f:
+                    json.dump(metrics_list, f, indent=2)
 
         # Print summary
         successful = sum(1 for r in results if r["success"])
