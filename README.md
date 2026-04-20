@@ -1,6 +1,6 @@
 # OCR Evaluation Framework
 
-A unified Python framework to evaluate 14 OCR models on a standardized test dataset.
+A unified Python framework to evaluate open-source OCR models on a standardized test dataset.
 Captures accuracy, latency, throughput, cost, and structured extraction quality.
 
 ## Quick Start
@@ -25,7 +25,7 @@ ls test-dataset/
 
 # 5. Run evaluations
 python run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
-python run_model.py --model azure_adi
+python run_model.py --model mistral_ocr
 python run_batch.py
 
 # 6. Generate report
@@ -58,7 +58,7 @@ dir test-dataset
 
 # 7. Run evaluations
 python run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
-python run_model.py --model azure_adi
+python run_model.py --model mistral_ocr
 python run_batch.py
 
 # 8. Generate report
@@ -86,24 +86,20 @@ To add more documents later, you can still run:
 python download_dataset.py --output-dir ./test-dataset --samples 5
 ```
 
-## Models Supported (14)
+## Models Supported (10)
 
 | # | Model | Type | GPU Needed? | Setup |
 |---|-------|------|-------------|-------|
-| 1 | Azure ADI | Cloud API | No | API key |
-| 2 | Google Cloud Vision | Cloud API | No | Service account JSON |
-| 3 | Amazon Textract | Cloud API | No | AWS credentials |
-| 4 | Amazon BDAn | Cloud API | No | AWS credentials + Bedrock access |
-| 5 | Mistral OCR | Cloud API | No | API key |
-| 6 | DeepSeek OCR | Open Source | Yes (16GB+) | HuggingFace model |
-| 7 | PaddleOCR | Open Source | Optional | pip install |
-| 8 | Docling/SmolDocling | Open Source | Optional | pip install |
-| 9 | Tesseract | Open Source | No (CPU) | System install |
-| 10 | olmOCR | Open Source | Yes (16GB+) | HuggingFace model |
-| 11 | Qwen2.5-VL | Open Source | Yes (16GB+) | HuggingFace model |
-| 12 | GOT-OCR 2.0 | Open Source | Yes (8-16GB) | HuggingFace model |
-| 13 | Surya OCR | Open Source | Optional | pip install |
-| 14 | Sarvam Vision OCR | API/Model | Varies | API key or model |
+| 1 | Tesseract | Open Source | No (CPU) | System install |
+| 2 | PaddleOCR | Open Source | Optional | pip install |
+| 3 | Docling/SmolDocling | Open Source | Optional | pip install |
+| 4 | Surya OCR | Open Source | Optional | pip install |
+| 5 | Mistral OCR | API | No | API key |
+| 6 | Sarvam Vision OCR | API | No | API key |
+| 7 | DeepSeek OCR | Open Source | Yes (16GB+) | HuggingFace model |
+| 8 | olmOCR | Open Source | Yes (16GB+) | HuggingFace model |
+| 9 | Qwen2.5-VL | Open Source | Yes (16GB+) | HuggingFace model |
+| 10 | GOT-OCR 2.0 | Open Source | Yes (8-16GB) | HuggingFace model |
 
 ## Prerequisites
 
@@ -125,7 +121,7 @@ The test dataset is already committed to the repo. HuggingFace login is only nee
    - https://huggingface.co/datasets/unstructured-io/SCORE-Bench
    - https://huggingface.co/datasets/aharley/rvl_cdip
 
-### Cloud API Keys
+### API Keys (Mistral OCR, Sarvam OCR)
 
 API keys are stored in `.env` (gitignored) and automatically loaded at runtime.
 Copy `.env.example` to `.env` and fill in your credentials:
@@ -157,24 +153,6 @@ python run_single.py --model mistral_ocr --input test-dataset/02_complex_tables/
 
 If both commands produce results with metrics, the framework is working correctly.
 
-## Team Assignments (Quick Reference)
-
-| Member | Models | First Command |
-|--------|--------|---------------|
-| Member 1 | DeepSeek, Sarvam, GOT-OCR | `python run_model.py --model deepseek_ocr` |
-| Member 2 | Azure ADI, Google Vision | `python run_model.py --model azure_adi` |
-| Member 3 | Textract, BDAn | `python run_model.py --model amazon_textract` |
-| Member 4 | Mistral, Qwen2.5-VL, olmOCR | `python run_model.py --model mistral_ocr` |
-| Member 5 | PaddleOCR, Tesseract, Surya | `python run_model.py --model tesseract` |
-| Member 6 (Lead) | Docling | `python run_model.py --model docling` |
-
-Each member should:
-1. Clone the repo and run setup
-2. Configure API keys for their assigned models only
-3. Run `run_single.py` with Tesseract first to validate the pipeline
-4. Then run `run_model.py` for each of their assigned models
-5. Log results in `docs/OCR_Test_Dataset_Tracker_v2.xlsx`
-
 ## Usage
 ```bash
 # List all available models
@@ -184,13 +162,13 @@ python run_batch.py --list
 python run_single.py --model tesseract --input path/to/document.jpg
 
 # Run one model on the entire dataset
-python run_model.py --model azure_adi
+python run_model.py --model mistral_ocr
 
 # Run all models on all documents (full evaluation)
 python run_batch.py
 
 # Run specific models only
-python run_batch.py --models tesseract paddleocr azure_adi mistral_ocr
+python run_batch.py --models tesseract paddleocr mistral_ocr surya
 
 # Generate comparison report + CSV export
 python evaluate.py --results-dir results/latest --export-csv
@@ -203,7 +181,7 @@ python evaluate.py --results-dir results/latest --export-csv
 - Models marked "Optional" GPU work on M-series chips via MPS
 - 32GB+ unified memory can handle 7B-9B parameter models
 - Set `device: mps` in config for Apple Silicon
-- For 30B+ models, use cloud GPU (Colab Pro / AWS / Azure ML)
+- For 30B+ models, use cloud GPU (Colab Pro or equivalent)
 
 ### Windows
 
@@ -263,10 +241,6 @@ ocr-eval-framework/
 │   ├── paddleocr_model.py    # PaddleOCR
 │   ├── docling_model.py      # Docling / SmolDocling
 │   ├── surya_model.py        # Surya OCR
-│   ├── azure_adi.py          # Azure AI Document Intelligence
-│   ├── google_vision.py      # Google Cloud Vision
-│   ├── amazon_textract.py    # Amazon Textract
-│   ├── amazon_bdan.py        # Amazon Bedrock Data Automation
 │   ├── mistral_ocr.py        # Mistral OCR
 │   ├── deepseek_ocr.py       # DeepSeek OCR
 │   ├── olmocr_model.py       # olmOCR

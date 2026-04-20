@@ -21,11 +21,11 @@ Scaffold and integrate a new OCR model into the evaluation framework following t
 
 There are three model categories — follow the matching pattern:
 
-### Cloud API Models (e.g., Azure, Google, Mistral)
+### API Models (e.g., Mistral, Sarvam)
 - Authentication via `.env` environment variables
 - Cost estimation in `estimate_cost()`
 - Network calls with proper error handling
-- Reference: `models/azure_adi.py`, `models/mistral_ocr.py`
+- Reference: `models/mistral_ocr.py`, `models/sarvam_ocr.py`
 
 ### Open-Source Local Models (e.g., Tesseract, PaddleOCR)
 - Config-driven parameters (language, modes)

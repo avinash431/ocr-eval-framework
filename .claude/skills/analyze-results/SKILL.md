@@ -74,7 +74,7 @@ This creates `all_metrics.csv` which can be loaded into pandas, Excel, or any vi
 
 When sharing results with the user:
 
-1. Lead with the key finding ("Azure ADI has the best overall accuracy, but Tesseract is 10x cheaper for printed English")
+1. Lead with the key finding ("Surya has the best forms CER, but Mistral OCR has 100% success rate across all categories")
 2. Show the comparison table with relevant metrics
 3. Call out surprising results or outliers
 4. Recommend the best model for the user's specific use case
