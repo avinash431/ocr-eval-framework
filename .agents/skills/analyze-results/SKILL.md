@@ -23,7 +23,7 @@ Deep-dive into OCR evaluation results to extract actionable insights.
 Read `batch_summary.json` and present a ranked table:
 
 ```bash
-python evaluate.py --results-dir results/<run_dir>
+python cli/evaluate.py --results-dir results/<run_dir>
 ```
 
 Rank models by the user's priority — common orderings:
@@ -65,7 +65,7 @@ For cloud API models, combine accuracy with cost data:
 ### Export for External Analysis
 
 ```bash
-python evaluate.py --results-dir results/<run_dir> --export-csv
+python cli/evaluate.py --results-dir results/<run_dir> --export-csv
 ```
 
 This creates `all_metrics.csv` which can be loaded into pandas, Excel, or any visualization tool.

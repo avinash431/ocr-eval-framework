@@ -1,5 +1,7 @@
 """Recompute metrics and corpus summaries for the whitepaper artifacts.
-
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 Reads raw outputs from the latest results directories, matches them against the
 current visible dataset snapshot, recomputes metrics on the GT-evaluable subset,
 and emits:

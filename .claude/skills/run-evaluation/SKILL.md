@@ -21,7 +21,7 @@ Execute OCR evaluations at three levels of scale and help interpret results.
 Quick test of one model on one document. Use for debugging or spot-checking.
 
 ```bash
-python run_single.py --model <model_name> --input <path_to_image> [--config configs/config.local.yaml] [--output output.txt]
+python cli/run_single.py --model <model_name> --input <path_to_image> [--config configs/config.local.yaml] [--output output.txt]
 ```
 
 When to use: user says "test X on this image", "try OCR on this document", "quick check"
@@ -31,7 +31,7 @@ When to use: user says "test X on this image", "try OCR on this document", "quic
 Run one model across the entire dataset with metrics.
 
 ```bash
-python run_model.py --model <model_name> [--config configs/config.local.yaml]
+python cli/run_model.py --model <model_name> [--config configs/config.local.yaml]
 ```
 
 Results saved to: `results/YYYYMMDD_HHMMSS_<model_name>/`
@@ -44,13 +44,13 @@ Run multiple (or all) models across the dataset for side-by-side comparison.
 
 ```bash
 # All models
-python run_batch.py [--config configs/config.local.yaml]
+python cli/run_batch.py [--config configs/config.local.yaml]
 
 # Specific models
-python run_batch.py --models tesseract mistral_ocr surya
+python cli/run_batch.py --models tesseract mistral_ocr surya
 
 # List available models
-python run_batch.py --list
+python cli/run_batch.py --list
 ```
 
 Results saved to: `results/YYYYMMDD_HHMMSS_batch/`
@@ -62,7 +62,7 @@ When to use: user says "compare all models", "benchmark", "run batch", "which mo
 ### Generate Report
 
 ```bash
-python evaluate.py --results-dir results/<latest_run_dir> [--export-csv]
+python cli/evaluate.py --results-dir results/<latest_run_dir> [--export-csv]
 ```
 
 Produces `report.html` with comparison tables, color-coded metrics, and per-category breakdowns.
@@ -86,7 +86,7 @@ Quality thresholds:
 
 ### Troubleshooting
 
-- **Model not found**: Check `python run_batch.py --list` — model file may have import errors
+- **Model not found**: Check `python cli/run_batch.py --list` — model file may have import errors
 - **API key errors**: Verify `.env` has the correct key and `load_config()` picks it up
 - **Timeout**: Increase `execution.timeout_seconds` in config
 - **No metrics**: Ground truth files must exist in `ground_truth_dir` with matching filenames (`<stem>_gt.txt`)

@@ -4,7 +4,7 @@ Common test input:
 - `test-dataset/02_complex_tables/forms/0012199830.png`
 
 Common command pattern:
-- `source venv/bin/activate && python run_single.py --model <model> --input test-dataset/02_complex_tables/forms/0012199830.png`
+- `source venv/bin/activate && python cli/run_single.py --model <model> --input test-dataset/02_complex_tables/forms/0012199830.png`
 
 ## Summary table
 

@@ -50,7 +50,7 @@ The test dataset contains 101 documents across 4 active categories:
 | 06_mixed_content/receipts | 10 | Receipt images |
 
 ```bash
-python download_dataset.py  # Download test documents
+python tools/download_dataset.py  # Download test documents
 ```
 
 ## Ground Truth
@@ -71,41 +71,41 @@ Ground truth comes from two sources:
 
 ```bash
 # To regenerate consensus GT (will not overwrite existing human GT):
-python generate_ground_truth.py --dry-run          # Preview
-python generate_ground_truth.py                     # Generate
+python tools/generate_ground_truth.py --dry-run          # Preview
+python tools/generate_ground_truth.py                     # Generate
 ```
 
 ## Running Evaluations
 
 ### Single document
 ```bash
-python run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
+python cli/run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
 ```
 
 ### Full dataset (single model)
 ```bash
-python run_model.py --model tesseract
-python run_model.py --model mistral_ocr
-python run_model.py --model surya
-python run_model.py --model docling
-python run_model.py --model paddleocr
-python run_model.py --model sarvam_ocr
-python run_model.py --model got_ocr
+python cli/run_model.py --model tesseract
+python cli/run_model.py --model mistral_ocr
+python cli/run_model.py --model surya
+python cli/run_model.py --model docling
+python cli/run_model.py --model paddleocr
+python cli/run_model.py --model sarvam_ocr
+python cli/run_model.py --model got_ocr
 ```
 
 ### Full dataset (all models)
 ```bash
-python run_batch.py
+python cli/run_batch.py
 ```
 
 ### Recompute metrics against expanded GT
 ```bash
-python recompute_metrics.py
+python tools/recompute_metrics.py
 ```
 
 ### Generate charts
 ```bash
-python generate_charts.py
+python tools/generate_charts.py
 ```
 
 ## Metrics Definitions

@@ -1,5 +1,7 @@
 """Generate consensus-based ground truth from multiple OCR model outputs.
-
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 Strategy:
 - Use Mistral OCR as the primary candidate (highest Phase 1 accuracy)
 - Cross-validate against other model outputs using token-level F1

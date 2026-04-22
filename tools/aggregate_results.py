@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 """Aggregate results from multiple model run directories and update whitepaper tables.
 
 Usage:
-    python aggregate_results.py
+    python tools/aggregate_results.py
 
 This script scans all results/ directories for completed model runs,
 computes aggregate metrics, and prints updated tables for the whitepaper.

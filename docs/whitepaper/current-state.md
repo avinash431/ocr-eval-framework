@@ -10,7 +10,7 @@ Repo: `ocr-eval-framework`
 The framework is real and runnable.
 
 Verified facts:
-- `python run_batch.py --list` successfully loads 10 registered OCR model wrappers:
+- `python cli/run_batch.py --list` successfully loads 10 registered OCR model wrappers:
   - deepseek_ocr
   - docling
   - got_ocr
@@ -22,7 +22,7 @@ Verified facts:
   - surya
   - tesseract
 - Local baseline command works:
-  - `source venv/bin/activate && python run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png`
+  - `source venv/bin/activate && python cli/run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png`
 - Verified output from that baseline run:
   - ~495 extracted characters
   - latency ~2918 ms in the latest run

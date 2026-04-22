@@ -13,7 +13,7 @@ Tech stack: Python 3.12 venv, existing OCR wrappers in `models/`, evaluation scr
 ## Current state snapshot
 
 Verified on 2026-04-09:
-- Repo loads all 14 model wrappers successfully via `python run_batch.py --list`.
+- Repo loads all 14 model wrappers successfully via `python cli/run_batch.py --list`.
 - Local Tesseract baseline runs successfully on `test-dataset/02_complex_tables/forms/0012199830.png`.
 - Current committed dataset has 101 documents, not the broader 100-150 cross-language corpus claimed in the outline.
 - Current dataset coverage is narrow:
@@ -124,8 +124,8 @@ Files:
 - Update workbook: `docs/OCR_Test_Dataset_Tracker.xlsx`
 
 Commands:
-- `source venv/bin/activate && python run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png`
-- `source venv/bin/activate && python run_single.py --model mistral_ocr --input test-dataset/02_complex_tables/forms/0012199830.png`
+- `source venv/bin/activate && python cli/run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png`
+- `source venv/bin/activate && python cli/run_single.py --model mistral_ocr --input test-dataset/02_complex_tables/forms/0012199830.png`
 - Repeat for each selected model
 
 Record for each run:
@@ -145,10 +145,10 @@ Files:
 - Metrics JSON under `results/<timestamp>_<model>/metrics/`
 
 Commands:
-- `source venv/bin/activate && python run_model.py --model tesseract`
-- `source venv/bin/activate && python run_model.py --model mistral_ocr`
-- `source venv/bin/activate && python run_model.py --model paddleocr`
-- `source venv/bin/activate && python run_model.py --model docling`
+- `source venv/bin/activate && python cli/run_model.py --model tesseract`
+- `source venv/bin/activate && python cli/run_model.py --model mistral_ocr`
+- `source venv/bin/activate && python cli/run_model.py --model paddleocr`
+- `source venv/bin/activate && python cli/run_model.py --model docling`
 - Optionally one cloud API comparator
 
 Verification:
@@ -167,7 +167,7 @@ Files:
 
 Preferred approach:
 - If enough models are rerun together, use `run_batch.py` and then:
-  - `source venv/bin/activate && python evaluate.py --results-dir results/<batch_run> --export-csv`
+  - `source venv/bin/activate && python cli/evaluate.py --results-dir results/<batch_run> --export-csv`
 - If runs are separate, write a small aggregation script later in `analysis/` to combine metrics across model run dirs
 
 Verification:

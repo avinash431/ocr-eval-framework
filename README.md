@@ -10,8 +10,8 @@ Captures accuracy, latency, throughput, cost, and structured extraction quality.
 # 1. Clone and setup
 git clone <your-repo-url>
 cd ocr-eval-framework
-chmod +x setup_env.sh
-./setup_env.sh
+chmod +x scripts/setup_env.sh
+./scripts/setup_env.sh
 
 # 2. Activate environment
 source venv/bin/activate
@@ -24,12 +24,12 @@ cp .env.example .env
 ls test-dataset/
 
 # 5. Run evaluations
-python run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
-python run_model.py --model mistral_ocr
-python run_batch.py
+python cli/run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
+python cli/run_model.py --model mistral_ocr
+python cli/run_batch.py
 
 # 6. Generate report
-python evaluate.py --results-dir results/latest
+python cli/evaluate.py --results-dir results/latest
 ```
 
 ### Windows
@@ -57,12 +57,12 @@ copy .env.example .env
 dir test-dataset
 
 # 7. Run evaluations
-python run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
-python run_model.py --model mistral_ocr
-python run_batch.py
+python cli/run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
+python cli/run_model.py --model mistral_ocr
+python cli/run_batch.py
 
 # 8. Generate report
-python evaluate.py --results-dir results/latest
+python cli/evaluate.py --results-dir results/latest
 ```
 
 ## Test Dataset
@@ -83,7 +83,7 @@ Ground truth files are in `test-dataset/ground_truth/` and are automatically mat
 
 To add more documents later, you can still run:
 ```bash
-python download_dataset.py --output-dir ./test-dataset --samples 5
+python tools/download_dataset.py --output-dir ./test-dataset --samples 5
 ```
 
 ## Models Supported (10)
@@ -139,14 +139,14 @@ Non-secret settings (model IDs, regions, languages) remain in `configs/config.ya
 
 After setup, validate the pipeline works with this exact command:
 ```bash
-python run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
+python cli/run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
 ```
 
 **Expected output:** ~495 chars extracted, CER ~0.53, latency ~4000ms
 
 Then test a cloud model (requires Mistral API key in `.env`):
 ```bash
-python run_single.py --model mistral_ocr --input test-dataset/02_complex_tables/forms/0012199830.png
+python cli/run_single.py --model mistral_ocr --input test-dataset/02_complex_tables/forms/0012199830.png
 ```
 
 **Expected output:** ~517 chars extracted, CER ~0.33, latency ~1700ms
@@ -156,22 +156,22 @@ If both commands produce results with metrics, the framework is working correctl
 ## Usage
 ```bash
 # List all available models
-python run_batch.py --list
+python cli/run_batch.py --list
 
 # Run one model on one document
-python run_single.py --model tesseract --input path/to/document.jpg
+python cli/run_single.py --model tesseract --input path/to/document.jpg
 
 # Run one model on the entire dataset
-python run_model.py --model mistral_ocr
+python cli/run_model.py --model mistral_ocr
 
 # Run all models on all documents (full evaluation)
-python run_batch.py
+python cli/run_batch.py
 
 # Run specific models only
-python run_batch.py --models tesseract paddleocr mistral_ocr surya
+python cli/run_batch.py --models tesseract paddleocr mistral_ocr surya
 
 # Generate comparison report + CSV export
-python evaluate.py --results-dir results/latest --export-csv
+python cli/evaluate.py --results-dir results/latest --export-csv
 ```
 
 ## Platform Notes
@@ -225,7 +225,9 @@ python evaluate.py --results-dir results/latest --export-csv
 ## Project Structure
 ```
 ocr-eval-framework/
-├── setup_env.sh              # Environment setup script (macOS/Linux)
+├── scripts/
+│   ├── setup_env.sh           # Environment setup script (macOS/Linux)
+│   └── run_phase2_chain.sh   # Phase 2 chain execution
 ├── download_dataset.py       # Download additional test documents
 ├── requirements.txt          # Python dependencies
 ├── .env.example              # API key template (copy to .env)

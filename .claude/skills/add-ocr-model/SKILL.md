@@ -114,7 +114,7 @@ If the model needs API keys:
 ```bash
 source venv/bin/activate
 python -c "from models import list_models; print(list_models())"
-python run_single.py --model <model_name> --input <test_image>
+python cli/run_single.py --model <model_name> --input <test_image>
 ```
 
 ## Important Rules

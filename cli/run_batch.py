@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Run all (or selected) models on the entire test dataset."""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import argparse
 from utils.helpers import load_config

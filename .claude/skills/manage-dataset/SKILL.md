@@ -49,10 +49,10 @@ test-dataset/
 
 ```bash
 # Download with default 5 samples per category
-python download_dataset.py --output-dir ./test-dataset --samples 5
+python tools/download_dataset.py --output-dir ./test-dataset --samples 5
 
 # Download more samples
-python download_dataset.py --output-dir ./test-dataset --samples 20
+python tools/download_dataset.py --output-dir ./test-dataset --samples 20
 ```
 
 The script downloads from public datasets:

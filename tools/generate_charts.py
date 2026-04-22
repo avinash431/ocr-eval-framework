@@ -1,5 +1,7 @@
 """Regenerate all whitepaper charts from expanded GT metrics.
-
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 Produces 13 figures in docs/whitepaper/figures/ using data from
 results/expanded_gt_metrics/.
 """

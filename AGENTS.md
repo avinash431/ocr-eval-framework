@@ -36,12 +36,12 @@ deepseek_ocr, qwen_vl, olmocr, got_ocr
 ## Key Commands
 ```bash
 source venv/bin/activate
-python run_single.py --model X --input Y     # single model, single doc
-python run_model.py --model X                # single model, full dataset
-python run_batch.py                          # all working models, full dataset
-python evaluate.py --results-dir Z           # generate HTML report + summary table
-python evaluate.py --results-dir Z --export-csv  # also export metrics CSV
-python download_dataset.py                   # download test documents
+python cli/run_single.py --model X --input Y     # single model, single doc
+python cli/run_model.py --model X                # single model, full dataset
+python cli/run_batch.py                          # all working models, full dataset
+python cli/evaluate.py --results-dir Z           # generate HTML report + summary table
+python cli/evaluate.py --results-dir Z --export-csv  # also export metrics CSV
+python tools/download_dataset.py                   # download test documents
 ```
 
 ## Metrics Supported
