@@ -56,7 +56,7 @@ whitespace collapse. F1 uses Counter-based bag-of-words (not set-based).
 - Receipt ground truth derived from Mistral OCR output — creates circularity (Mistral gets CER=0, F1=1.0 on receipts)
 - Handwritten category is 32x32 DHCD character crops, not page-scale handwritten documents
 - Indian languages category has only 1 document — statistically insufficient
-- Ground truth covers only 15/91 docs (5 forms + 10 receipts)
+- Ground truth covers 60/105 docs (20 human-verified forms + 40 consensus)
 - No pairwise F1 differences are statistically significant at n=5 (Wilcoxon p>0.05)
 
 ## Active Batch Run

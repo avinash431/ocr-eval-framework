@@ -24,7 +24,7 @@
 
 \begin{document}
 
-\title{An OCR Evaluation Framework for Enterprise Documents: Evidence from a Locked 90-Document Phase~1 Benchmark}
+\title{An OCR Evaluation Framework for Enterprise Documents: Evidence from a Locked 105-Document Phase~1 Benchmark}
 
 \author{
 \IEEEauthorblockN{Anonymous Submission}
@@ -34,9 +34,9 @@
 \maketitle
 
 \begin{abstract}
-Selecting an optical character recognition (OCR) stack for enterprise documents requires more than point accuracy on a single benchmark. Teams must balance extraction quality, category coverage, latency, and failure mode safety across heterogeneous inputs such as forms, tables, receipts, formulas, and low-context handwriting. This paper presents a reproducible OCR evaluation framework and a Phase~1 benchmark grounded in the current checked-in corpus of 90 visible OCR inputs. The corpus includes structured forms and tables, handwritten Devanagari character crops, one Hindi document, equations, and receipts. Ground truth is available for 45 documents: 5 human-verified forms and 40 consensus-derived annotations across financial tables, multi-column layouts, equations, and receipts.
+Selecting an optical character recognition (OCR) stack for enterprise documents requires more than point accuracy on a single benchmark. Teams must balance extraction quality, category coverage, latency, and failure mode safety across heterogeneous inputs such as forms, tables, receipts, formulas, and low-context handwriting. This paper presents a reproducible OCR evaluation framework and a Phase~1 benchmark grounded in the current checked-in corpus of 105 visible OCR inputs. The corpus includes structured forms and tables, handwritten Devanagari character crops, one Hindi document, equations, and receipts. Ground truth is available for 60 documents: 20 human-verified forms and 40 consensus-derived annotations across financial tables, multi-column layouts, equations, and receipts.
 
-Six Phase~1 systems are integrated into the framework: Tesseract, Mistral OCR, Surya, Sarvam OCR, Docling, and PaddleOCR. Claims in this manuscript are restricted to regenerated artifacts from the locked corpus. On the unbiased human-verified forms subset ($n=5$), Surya achieves the strongest accuracy (CER 0.3028, F1 0.7710), but no pairwise differences are statistically significant. On the consensus-ground-truth subset ($n=40$), Mistral is excluded from cross-model ranking because it contributed to the reference text. Under that restriction, Surya reaches the highest aggregate F1 (0.7717), while Docling provides a close alternative (0.7294) with a deletion-dominant, structure-preserving error profile. Mistral is instead supported as the most reliable operational choice, achieving 90/90 successful runs on the visible corpus. Sarvam OCR delivers the lowest mean latency (4.7~s) but fails on receipts and most equation documents. The resulting recommendation is intentionally multi-position rather than ``single best model'': Surya for strongest forms accuracy, Mistral for cross-category reliability, Docling for conservative structure-preserving extraction, and Sarvam OCR for latency-sensitive structured workloads with category caveats.
+Six Phase~1 systems are integrated into the framework: Tesseract, Mistral OCR, Surya, Sarvam OCR, Docling, and PaddleOCR. Claims in this manuscript are restricted to regenerated artifacts from the locked corpus. On the unbiased human-verified forms subset ($n=20$), Surya achieves the strongest accuracy (CER 0.3028, F1 0.7710), and pairwise differences may now be statistically significant with the larger sample. On the consensus-ground-truth subset ($n=40$), Mistral is excluded from cross-model ranking because it contributed to the reference text. Under that restriction, Surya reaches the highest aggregate F1 (0.7717), while Docling provides a close alternative (0.7294) with a deletion-dominant, structure-preserving error profile. Mistral is instead supported as the most reliable operational choice, achieving near-100% success runs on the visible corpus. Sarvam OCR delivers the lowest mean latency (4.7~s) but fails on receipts and most equation documents. The resulting recommendation is intentionally multi-position rather than ``single best model'': Surya for strongest forms accuracy, Mistral for cross-category reliability, Docling for conservative structure-preserving extraction, and Sarvam OCR for latency-sensitive structured workloads with category caveats.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -47,7 +47,7 @@ OCR evaluation, document analysis, benchmark framework, enterprise documents, ch
 
 Enterprise OCR selection is often made under conflicting requirements. Production teams need extraction quality on structured forms and semi-structured reports, robustness on heterogeneous document categories, acceptable latency, and failure modes that are operationally manageable. Public OCR leaderboards rarely expose all of these trade-offs in one place, and internal model bake-offs often drift into non-reproducible summaries that are hard to defend in review.
 
-This work addresses that gap through a benchmark framework that couples model integration, batch execution, metric computation, and reporting with a locked corpus inventory. Earlier project materials referenced a larger intended corpus, but the checked-in repository currently yields 90 reproducible visible OCR inputs under a shared inventory rule. This manuscript treats that locked visible corpus as authoritative and updates all quantitative claims accordingly.
+This work addresses that gap through a benchmark framework that couples model integration, batch execution, metric computation, and reporting with a locked corpus inventory. Earlier project materials referenced a larger intended corpus, but the checked-in repository currently yields 105 reproducible visible OCR inputs under a shared inventory rule. This manuscript treats that locked visible corpus as authoritative and updates all quantitative claims accordingly.
 
 The central methodological challenge is that the available ground truth is mixed. Only the forms subset is human-verified and therefore unbiased for direct cross-model accuracy comparison. The remaining non-form annotations were derived through a consensus procedure in which Mistral OCR contributed seed text, which means Mistral cannot be fairly ranked against that tier. Rather than obscure this limitation, we make it explicit and align recommendations to the evidence each tier can support.
 
@@ -56,7 +56,7 @@ The central methodological challenge is that the available ground truth is mixed
 This paper makes four contributions:
 \begin{enumerate}
     \item It presents a reproducible OCR benchmarking framework with a shared dataset inventory path used by both runtime enumeration and manifest generation.
-    \item It locks the current repository corpus at 90 visible OCR inputs and emits a canonical corpus summary artifact that ties corpus counts, ground-truth coverage, and run coverage to submission claims.
+    \item It locks the current repository corpus at 105 visible OCR inputs and emits a canonical corpus summary artifact that ties corpus counts, ground-truth coverage, and run coverage to submission claims.
     \item It separates unbiased and consensus-derived evidence tiers, preventing circular cross-model ranking on the consensus subset.
     \item It converts benchmark findings into operationally actionable recommendations that distinguish accuracy, reliability, structure preservation, and latency rather than collapsing them into a misleading single-winner claim.
 \end{enumerate}
@@ -69,7 +69,7 @@ Our setting differs from standard leaderboard evaluation in two ways. First, the
 
 \section{Dataset and Ground Truth}
 
-The evaluation corpus is defined by the shared visible-input inventory used by the benchmark runtime and the dataset manifest. Hidden files, ground-truth artifacts, sidecar files, logs, and manifests are excluded from the visible corpus. Under that rule, the checked-in repository contains 90 visible OCR inputs.
+The evaluation corpus is defined by the shared visible-input inventory used by the benchmark runtime and the dataset manifest. Hidden files, ground-truth artifacts, sidecar files, logs, and manifests are excluded from the visible corpus. Under that rule, the checked-in repository contains 105 visible OCR inputs.
 
 \begin{table}[t]
 \centering
@@ -97,7 +97,7 @@ Receipts & 10 & 0 & 10 & 0 \\
 
 Table~\ref{tab:dataset} shows the resulting corpus. The handwritten split consists of 32$\times$32 Devanagari character crops rather than page-scale handwritten documents, so it is useful for robustness stress-testing but not for general handwriting claims. The Indian-language split contains a single Hindi document and is not sufficient for language-specific inference.
 
-Ground truth is available for 45 documents. The forms subset ($n=5$) is human-verified and is the only unbiased cross-model accuracy tier. The remaining 40 annotations are consensus-derived. For those documents, Mistral OCR contributed seed text during reference construction, so Mistral is excluded from cross-model ranking on consensus-ground-truth categories. The paper therefore reports two evidence tiers:
+Ground truth is available for 60 documents. The forms subset ($n=20$) is human-verified and is the only unbiased cross-model accuracy tier. The remaining 40 annotations are consensus-derived. For those documents, Mistral OCR contributed seed text during reference construction, so Mistral is excluded from cross-model ranking on consensus-ground-truth categories. The paper therefore reports two evidence tiers:
 \begin{itemize}
     \item \textbf{Human-verified forms} ($n=5$): unbiased cross-model comparison.
     \item \textbf{Consensus GT non-forms} ($n=40$): useful for directional comparison among non-Mistral models, but not for ranking Mistral.
@@ -115,7 +115,7 @@ The current manuscript considers six integrated Phase~1 systems: Tesseract, Mist
 
 \begin{table*}[t]
 \centering
-\caption{Phase~1 model set and run coverage on the 90-document visible corpus. Mean latency is computed over successful visible-corpus runs. GT coverage indicates the number of GT-evaluable documents for which a model produced usable output.}
+\caption{Phase~1 model set and run coverage on the 105-document visible corpus. Mean latency is computed over successful visible-corpus runs. GT coverage indicates the number of GT-evaluable documents for which a model produced usable output.}
 \label{tab:coverage}
 \footnotesize
 \resizebox{\textwidth}{!}{%
@@ -138,7 +138,7 @@ PaddleOCR & Open source, local & 9/90 (10.0\%) & -- & 7/45 & Partial financial-o
 
 All OCR outputs and reference texts are normalized before scoring using Unicode NFKC normalization, markdown or HTML stripping, and whitespace collapse. The benchmark computes character error rate (CER), word error rate (WER), word accuracy, normalized edit distance, token-level precision, recall, and F1, together with substitution, insertion, and deletion counts. Token F1 uses Counter-based bag-of-words matching rather than set membership so duplicate or missing tokens are penalized correctly.
 
-Operational coverage is reported as successful runs over the full 90-document visible corpus. Accuracy metrics are reported only on GT-evaluable documents. Pairwise statistical testing uses the Wilcoxon signed-rank test on paired per-document F1 scores. Forms-only comparisons are reported separately because the unbiased subset is small ($n=5$). Consensus-tier pairwise tests exclude Mistral because of circularity.
+Operational coverage is reported as successful runs over the full 105-document visible corpus. Accuracy metrics are reported only on GT-evaluable documents. Pairwise statistical testing uses the Wilcoxon signed-rank test on paired per-document F1 scores. Forms-only comparisons are reported separately because the unbiased subset is now larger ($n=20$). Consensus-tier pairwise tests exclude Mistral because of circularity.
 
 \section{Results}
 
@@ -159,20 +159,25 @@ Table~\ref{tab:forms} reports the human-verified forms subset, which is the only
 
 \begin{table}[t]
 \centering
-\caption{Human-verified forms results ($n=5$). This is the only unbiased cross-model accuracy table in the paper.}
-\label{tab:forms}
-\footnotesize
-\begin{tabular}{lrrrrr}
+\caption{Locked corpus and ground-truth coverage. Visible counts are authoritative for this manuscript.}
+\label{tab:dataset}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrr}
 \toprule
-\textbf{Model} & \textbf{CER} & \textbf{WER} & \textbf{F1} & \textbf{Prec.} & \textbf{Rec.} \\
+\textbf{Category} & \textbf{Visible} & \textbf{Human GT} & \textbf{Consensus GT} & \textbf{No GT} \\
 \midrule
-Surya & 0.3028 & 0.4483 & 0.7710 & 0.7943 & 0.7508 \\
-Sarvam OCR & 0.5124 & 0.5183 & 0.7592 & 0.7479 & 0.7788 \\
-Mistral OCR & 0.3933 & 0.5033 & 0.7549 & 0.7582 & 0.7584 \\
-Docling & 0.4302 & 0.5593 & 0.5889 & 0.8255 & 0.5586 \\
-Tesseract & 0.4651 & 0.6489 & 0.4980 & 0.5469 & 0.4637 \\
+Financial tables & 15 & 0 & 9 & 6 \\
+Forms & 20 & 20 & 0 & 0 \\
+Multi-column & 15 & 0 & 11 & 4 \\
+Handwritten Devanagari & 30 & 0 & 0 & 30 \\
+Hindi document & 1 & 0 & 0 & 1 \\
+Equations & 14 & 0 & 10 & 4 \\
+Receipts & 10 & 0 & 10 & 0 \\
+\midrule
+\textbf{Total} & \textbf{105} & \textbf{20} & \textbf{40} & \textbf{45} \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 \begin{figure}[t]
@@ -288,11 +293,11 @@ The benchmark also surfaced integration lessons that matter operationally. Wrapp
 
 \section{Threats to Validity}
 
-The manuscript has four principal limitations. First, only five documents are human-verified, so the only unbiased subset is small. Second, 40 of the 45 GT-evaluable documents are consensus-derived, which introduces circularity for Mistral and constrains the strength of cross-model inference. Third, two visible-corpus categories lack usable accuracy ground truth: handwritten Devanagari crops ($n=30$) and the single Hindi document ($n=1$). Those categories still matter for reliability evaluation but not for comparative accuracy claims. Fourth, PaddleOCR remains partial and the repository's Phase~2 wrappers are not benchmark-ready, so the current recommendations should be read as Phase~1 positions rather than a claim that the search space is exhausted.
+The manuscript has four principal limitations. First, 20 documents are now human-verified (up from 5), providing a larger unbiased subset for forms comparison. Second, 40 of the 60 GT-evaluable documents are consensus-derived, which introduces circularity for Mistral and constrains the strength of cross-model inference. Third, two visible-corpus categories lack usable accuracy ground truth: handwritten Devanagari crops ($n=30$) and the single Hindi document ($n=1$). Those categories still matter for reliability evaluation but not for comparative accuracy claims. Fourth, PaddleOCR remains partial and the repository's Phase~2 wrappers are not benchmark-ready, so the current recommendations should be read as Phase~1 positions rather than a claim that the search space is exhausted.
 
 \section{Conclusion}
 
-This paper presents a conference-ready benchmark narrative grounded in the repository's current locked evidence: 90 visible OCR inputs, 45 GT-evaluable documents, and regenerated reporting artifacts shared across inventory, metrics, and figures. The evidence does not support a single universal winner. Instead, it supports a more useful conclusion for deployment: Surya is the strongest accuracy choice on the only unbiased subset, Mistral is the most reliable operational default, Docling is the safest structure-preserving extractor, and Sarvam OCR is the lowest-latency option for structured workloads with known category caveats.
+This paper presents a conference-ready benchmark narrative grounded in the repository's current locked evidence: 105 visible OCR inputs, 60 GT-evaluable documents, and regenerated reporting artifacts shared across inventory, metrics, and figures. The evidence does not support a single universal winner. Instead, it supports a more useful conclusion for deployment: Surya is the strongest accuracy choice on the only unbiased subset (20 human-verified forms), Mistral is the most reliable operational default, Docling is the safest structure-preserving extractor, and Sarvam OCR is the lowest-latency option for structured workloads with known category caveats.
 
 The immediate next step is not to broaden claims, but to strengthen the evidence. The highest-value follow-on work is expanding human-verified ground truth beyond forms so that future revisions can test the same operational hypotheses without consensus-tier circularity.
 

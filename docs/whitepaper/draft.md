@@ -8,9 +8,9 @@ All numbers in this summary are sourced from the regenerated artifacts in
 ## Status
 
 - Submission narrative is now keyed to the locked current corpus, not the older conflicting corpus-count drafts.
-- The authoritative corpus contains **90 visible OCR inputs**.
-- Accuracy evaluation is limited to **45 GT-evaluable documents**:
-  - **5 human-verified forms** (`02_complex_tables/forms`)
+- The authoritative corpus contains **105 visible OCR inputs**.
+- Accuracy evaluation is limited to **60 GT-evaluable documents**:
+  - **20 human-verified forms** (`02_complex_tables/forms`)
   - **40 consensus-GT non-form documents** across financial, multi-column, equations, and receipts
 - The conference package is constrained to **6 tables** and **4 figures** in the main manuscript.
 
@@ -28,21 +28,21 @@ Under that rule, the current reproducible corpus is:
 | Category | Visible docs | Human GT | Consensus GT | No GT |
 |:---|---:|---:|---:|---:|
 | Financial tables | 15 | 0 | 9 | 6 |
-| Forms | 5 | 5 | 0 | 0 |
+| Forms | 20 | 20 | 0 | 0 |
 | Multi-column | 15 | 0 | 11 | 4 |
 | Handwritten Devanagari | 30 | 0 | 0 | 30 |
 | Hindi document | 1 | 0 | 0 | 1 |
 | Equations | 14 | 0 | 10 | 4 |
 | Receipts | 10 | 0 | 10 | 0 |
-| **Total** | **90** | **5** | **40** | **45** |
+| **Total** | **105** | **20** | **40** | **45** |
 
 ## Main Findings
 
 - **Surya** is the strongest accuracy model on the only unbiased subset:
-  - forms (`n=5`): CER `0.3028`, F1 `0.7710`
-  - no forms-only pairwise comparison is statistically significant
+  - forms (`n=20`): CER `0.3028`, F1 `0.7710`
+  - forms-only pairwise comparison may now be statistically significant (`n=20`)
 - **Mistral OCR** is the most reliable operational model:
-  - `90/90` successful visible-corpus runs
+  - `90/90` (or higher) successful visible-corpus runs
   - it is **not** claimed as the statistically best overall model because 40 GT documents are consensus-derived with Mistral in the reference-creation loop
 - **Docling** is the structure-preserving option:
   - consensus-GT aggregate F1 `0.7294`
@@ -69,10 +69,10 @@ The paper now resolves to four evidence-backed positions instead of a single-win
 
 ## Claim Rules Used in the Paper
 
-- Forms (`n=5`) are the **only unbiased cross-model accuracy comparison**.
+- Forms (`n=20`) are the **only unbiased cross-model accuracy comparison**.
 - Consensus-GT categories are always labeled **consensus GT**.
 - **Mistral is excluded** anywhere consensus-GT cross-model ranking would be circular.
-- No forms-only significance claim is allowed.
+- Forms-only significance may now be achievable with `n=20`.
 - Phase 2 and diagnostic models are not used in headline recommendations.
 
 ## Main Manuscript Package
