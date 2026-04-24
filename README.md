@@ -5,31 +5,44 @@ Captures accuracy, latency, throughput, cost, and structured extraction quality.
 
 ## Quick Start
 
-### macOS / Linux
+### macOS / Linux (uv, recommended)
 ```bash
-# 1. Clone and setup
+# 1. Clone
 git clone <your-repo-url>
 cd ocr-eval-framework
-chmod +x scripts/setup_env.sh
-./scripts/setup_env.sh
 
-# 2. Activate environment
-source venv/bin/activate
+# 2. Install uv (https://docs.astral.sh/uv/) if not already present
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# 3. Configure API keys
+# 3. Create a Python 3.12 venv and sync locked deps
+uv venv --python 3.12
+source .venv/bin/activate
+uv sync                         # runtime deps
+uv sync --group dev             # + dev tooling (pytest, ruff, pylint)
+
+# 4. Configure API keys
 cp .env.example .env
 # Edit .env with your API keys
 
-# 4. Test dataset is already included — verify it's there
+# 5. Test dataset is already included — verify it's there
 ls test-dataset/
 
-# 5. Run evaluations
+# 6. Run evaluations
 python cli/run_single.py --model tesseract --input test-dataset/02_complex_tables/forms/0012199830.png
 python cli/run_model.py --model mistral_ocr
 python cli/run_batch.py
 
-# 6. Generate report
+# 7. Generate report
 python cli/evaluate.py --results-dir results/latest
+```
+
+### Legacy (pip + venv)
+The `requirements.txt` file is retained for compatibility. Prefer `uv sync` so your local environment matches CI.
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install --upgrade pip wheel setuptools
+pip install -r requirements.txt
 ```
 
 ### Windows

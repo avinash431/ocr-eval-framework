@@ -31,25 +31,28 @@
 \@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Consensus-ground-truth aggregate results on non-form categories. Mistral is excluded from cross-model ranking due to circularity; PaddleOCR is omitted because the checked-in run is partial and financial-only.}}{3}{table.4}\protected@file@percent }
 \newlabel{tab:consensus}{{IV}{3}{Consensus-ground-truth aggregate results on non-form categories. Mistral is excluded from cross-model ranking due to circularity; PaddleOCR is omitted because the checked-in run is partial and financial-only}{table.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-C}}Consensus-GT Aggregate Results}{3}{subsection.6.3}\protected@file@percent }
-\bibstyle{IEEEtran}
-\bibcite{smith2007tesseract}{1}
-\bibcite{paddleocr2020}{2}
-\bibcite{funsd}{3}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-D}}Category-wise Behavior}{4}{subsection.6.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-E}}Supported Statistical Tests}{4}{subsection.6.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-F}}Error Profiles and Recommendation Logic}{4}{subsection.6.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Engineering Lessons}{4}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Tesseract Language-Pack Ablation}{4}{subsection.7.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VIII}Threats to Validity}{4}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusion}{4}{section.9}\protected@file@percent }
+\bibstyle{IEEEtran}
+\bibcite{smith2007tesseract}{1}
+\bibcite{paddleocr2020}{2}
+\bibcite{funsd}{3}
 \bibcite{levenshtein1966}{4}
 \bibcite{rice1996measuring}{5}
 \@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Per-category token F1. Column headers include category size and GT tier. Cells marked \texttt  {--} indicate not attempted, not supported, or excluded from ranking. Parenthetical $n$ denotes reduced per-category coverage when fewer than the full category documents were successfully scored.}}{5}{table.5}\protected@file@percent }
 \newlabel{tab:percategory}{{V}{5}{Per-category token F1. Column headers include category size and GT tier. Cells marked \texttt {--} indicate not attempted, not supported, or excluded from ranking. Parenthetical $n$ denotes reduced per-category coverage when fewer than the full category documents were successfully scored}{table.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Category-wise F1 across the main GT-evaluable categories. Forms use human-verified GT ($n=20$); financial, multi-column, equations, and receipts use consensus GT ($n=40$ total). Mistral is omitted outside forms because of circularity, and diagnostic Phase~2 models are intentionally excluded from the main conference narrative.}}{5}{figure.3}\protected@file@percent }
 \newlabel{fig:category}{{3}{5}{Category-wise F1 across the main GT-evaluable categories. Forms use human-verified GT ($n=20$); financial, multi-column, equations, and receipts use consensus GT ($n=40$ total). Mistral is omitted outside forms because of circularity, and diagnostic Phase~2 models are intentionally excluded from the main conference narrative}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusion}{5}{section.9}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{References}{5}{section*.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Supported pairwise Wilcoxon tests on per-document F1. Consensus-inclusive rows exclude Mistral due to consensus-GT circularity. Forms-only rows use the human-verified $n=20$ subset; Tesseract and Docling each significantly outperform Mistral ($p<0.01$), while Tesseract vs.\ Docling is not significant on forms ($p=0.498$).}}{5}{table.6}\protected@file@percent }
-\newlabel{tab:stats}{{VI}{5}{Supported pairwise Wilcoxon tests on per-document F1. Consensus-inclusive rows exclude Mistral due to consensus-GT circularity. Forms-only rows use the human-verified $n=20$ subset; Tesseract and Docling each significantly outperform Mistral ($p<0.01$), while Tesseract vs.\ Docling is not significant on forms ($p=0.498$)}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Supported pairwise Wilcoxon tests on per-document F1. Consensus-inclusive rows exclude Mistral due to consensus-GT circularity. Forms-only rows use the human-verified $n=20$ subset; Tesseract and Docling each significantly outperform Mistral ($p<0.01$), while Tesseract vs.\ Docling is not significant on forms ($p=0.498$).}}{6}{table.6}\protected@file@percent }
+\newlabel{tab:stats}{{VI}{6}{Supported pairwise Wilcoxon tests on per-document F1. Consensus-inclusive rows exclude Mistral due to consensus-GT circularity. Forms-only rows use the human-verified $n=20$ subset; Tesseract and Docling each significantly outperform Mistral ($p<0.01$), while Tesseract vs.\ Docling is not significant on forms ($p=0.498$)}{table.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Error decomposition across GT-evaluable documents. Bars show substitution, insertion, and deletion shares of total edit operations. Mistral is included descriptively, but not as a consensus-ground-truth ranking target because of circularity.}}{6}{figure.4}\protected@file@percent }
 \newlabel{fig:errors}{{4}{6}{Error decomposition across GT-evaluable documents. Bars show substitution, insertion, and deletion shares of total edit operations. Mistral is included descriptively, but not as a consensus-ground-truth ranking target because of circularity}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Tesseract language-pack ablation on 15 USGov PDF forms. Paired deltas are taken doc-by-doc (multi-lang minus eng-only). Character-level accuracy is essentially unchanged on pure-English forms, but the multi-language pack more than doubles latency.}}{6}{table.7}\protected@file@percent }
+\newlabel{tab:tesseract-lang}{{VII}{6}{Tesseract language-pack ablation on 15 USGov PDF forms. Paired deltas are taken doc-by-doc (multi-lang minus eng-only). Character-level accuracy is essentially unchanged on pure-English forms, but the multi-language pack more than doubles latency}{table.7}{}}
 \gdef \@abspage@last{6}

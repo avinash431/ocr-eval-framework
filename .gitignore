@@ -15,3 +15,6 @@ results/
 # Temp
 _tmp_*/
 *.log
+
+# Claude Code runtime state
+.claude/scheduled_tasks.lock

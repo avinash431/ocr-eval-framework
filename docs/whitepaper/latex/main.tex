@@ -292,6 +292,29 @@ Taken together, the evidence supports five clean recommendation positions:
 
 The benchmark also surfaced integration lessons that matter operationally. Wrapper drift was real across multiple libraries: Surya required migration to a new predictor architecture, PaddleOCR required version-aware API handling, and Sarvam OCR required an asynchronous job workflow rather than a single request-response call. More importantly, behavior under failure mattered as much as raw metric averages. Docling's conservative omissions are operationally different from Sarvam OCR's insertion-heavy outputs, even when F1 values are similar. Production recommendation therefore depends on error profile, not just aggregate score.
 
+\subsection{Tesseract Language-Pack Ablation}
+
+The default Tesseract configuration in the repository loads five language packs (\texttt{eng+hin+tel+tam+ben}) because the corpus spans English forms, Hindi Devanagari crops, and three other Indic scripts. To quantify the cost of that choice on pure-English inputs, we ran a one-knob ablation on the 15 USGov PDF forms that have human-verified \texttt{\_gt.txt} ground truth: Tesseract with \texttt{eng} only versus Tesseract with the full multi-language pack, holding PSM, OEM, DPI, and preprocessing fixed. Table~\ref{tab:tesseract-lang} reports the paired results.
+
+\begin{table}[t]
+\centering
+\caption{Tesseract language-pack ablation on 15 USGov PDF forms. Paired deltas are taken doc-by-doc (multi-lang minus eng-only). Character-level accuracy is essentially unchanged on pure-English forms, but the multi-language pack more than doubles latency.}
+\label{tab:tesseract-lang}
+\footnotesize
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Variant} & \textbf{CER} & \textbf{WER} & \textbf{F1} & \textbf{Latency (ms)} \\
+\midrule
+\texttt{eng} only                & 0.3410 & 0.4386 & 0.9185 & 21{,}119 \\
+\texttt{eng+hin+tel+tam+ben}     & 0.3259 & 0.4297 & 0.9170 & 47{,}248 \\
+\midrule
+Paired $\Delta$ (multi $-$ eng) & $-0.0151$ & $-0.0089$ & $-0.0015$ & $+26{,}129$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three observations follow. First, on pure-English USGov forms the multi-language pack does not degrade character-level accuracy as earlier project notes suggested; the paired CER delta is slightly negative, i.e.\ marginally better with the multi-language pack. Second, token-level F1 is indistinguishable between the two configurations ($\Delta F_1 = -0.0015$). Third, the multi-language pack costs roughly $2.24\times$ the eng-only latency (47.2~s vs.\ 21.1~s per document on average). The operational conclusion is that language-pack choice is a latency-for-coverage trade, not a latency-for-accuracy trade, on English-dominant inputs; the earlier qualitative claim that the multi-language pack ``garbles Indic characters'' is not supported on this subset and should be retested on Devanagari pages when page-scale Hindi ground truth is available.
+
 \section{Threats to Validity}
 
 The manuscript has four principal limitations. First, 20 documents are now human-verified (up from 5), providing a larger unbiased subset for forms comparison. Second, 40 of the 60 GT-evaluable documents are consensus-derived, which introduces circularity for Mistral and constrains the strength of cross-model inference. Third, two visible-corpus categories lack usable accuracy ground truth: handwritten Devanagari crops ($n=30$) and the single Hindi document ($n=1$). Those categories still matter for reliability evaluation but not for comparative accuracy claims. Fourth, PaddleOCR remains partial and the repository's Phase~2 wrappers are not benchmark-ready, so the current recommendations should be read as Phase~1 positions rather than a claim that the search space is exhausted.
